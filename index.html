@@ -13,6 +13,39 @@
 
     <div class="container py-4">
         <h1 class="text-center mb-4">Pokémon API</h1>
+        <div id="page-action" class="text-center mb-4">
+            <div id="search-item">
+                <div class="input-group mb-5">
+                    <input type="text" id="search-input" class="form-control"
+                        placeholder="Tìm kiếm Pokémon theo tên...">
+                    <button id="search-btn" class="btn btn-primary">Tìm kiếm</button>
+                </div>
+            </div>
+            <label for="type-filter" class="form-label me-2">Lọc theo loại:</label>
+            <select id="type-filter" class="form-select d-inline-block w-auto">
+                <option value="">Tất cả</option>
+                <option value="normal">Normal</option>
+                <option value="fire">Fire</option>
+                <option value="water">Water</option>
+                <option value="grass">Grass</option>
+                <option value="electric">Electric</option>
+                <option value="ice">Ice</option>
+                <option value="fighting">Fighting</option>
+                <option value="poison">Poison</option>
+                <option value="ground">Ground</option>
+                <option value="flying">Flying</option>
+                <option value="psychic">Psychic</option>
+                <option value="bug">Bug</option>
+                <option value="rock">Rock</option>
+                <option value="ghost">Ghost</option>
+                <option value="dark">Dark</option>
+                <option value="dragon">Dragon</option>
+                <option value="steel">Steel</option>
+                <option value="fairy">Fairy</option>
+                <option value="unknown">Unknown</option>
+                <option value="shadow">Shadow</option>
+            </select>
+        </div>
         <div id="pokemon-list" class="row g-3 justify-content-center"></div>
     </div>
     <div id="page-controls" class="d-flex justify-content-center align-items-center gap-2 mb-3">
