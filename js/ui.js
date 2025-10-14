@@ -3,8 +3,8 @@ import { LIMIT, totalPages, fetchPokemonList, fetchPokemonDetails } from "./api.
 export let currentPage = 1;
 export function createPokemonCard(pokemon) {
     const card = document.createElement("div");
-    card.className = "card text-center p-2 shadow-sm";
-    card.style.width = "12rem";
+    card.className = "card text-center p-2 m-2 shadow-sm";
+    card.style.width = "15rem";
     card.innerHTML = `
     <img src="${pokemon.img}" class="card-img-top" alt="${pokemon.name}">
     <div class="card-body">
