@@ -1,5 +1,4 @@
-import { renderPokemons, currentPage, filterPokemonByType } from "./ui.js"
-import { fetchPokemonTypes } from "./api.js"
+import { renderPokemons, currentPage, filterPokemonByType, searchPokemonByName } from "./ui.js"
 
 document.getElementById("prev-btn").onclick = () => {
   if (currentPage > 1) renderPokemons(currentPage - 1)
@@ -11,6 +10,11 @@ document.getElementById("next-btn").onclick = () => {
   })
 }
 renderPokemons(1).catch(console.error)
-document
-  .getElementById("type-filter")
-  .addEventListener("change", filterPokemonByType)
+document.getElementById("type-filter").addEventListener("change", filterPokemonByType)
+document.getElementById("search-btn").addEventListener("click", searchPokemonByName)
+document.getElementById("search-input").addEventListener("keypress", (e) => {
+    if(e.key === "Enter") searchPokemonByName()
+})
+document.getElementById("search-input").addEventListener("blur",(e)=>{
+    if(!e.target.value.trim()) filterPokemonByType("all")
+})
