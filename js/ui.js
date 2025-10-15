@@ -6,17 +6,22 @@ let filteredPokemonNames = []
 let filteredTotalPages = 1
 
 export function createPokemonCard(pokemon) {
+    const mainType = pokemon.types.split(",")[0].trim().toLowerCase();
     const card = document.createElement("div");
-    card.className = "card text-center p-2 m-2 shadow-sm"
+    card.className = `card text-center p-2 m-2 shadow-sm type-${mainType}`
     card.style.width = "15rem"
     card.innerHTML = `
     <img src="${pokemon.img}" class="card-img-top" alt="${pokemon.name}">
     <div class="card-body">
       <h5 class="card-title text-capitalize">${pokemon.name}</h5>
-      <p class="card-text mb-0">Type: ${pokemon.types}</p>
-      <button class="btn btn-success">Details</button>
+      <div class="pokemon-types">
+        ${pokemon.types
+            .split(",")
+            .map(t => `<span class="type-tag ${t.trim().toLowerCase()}">${t.trim().toLowerCase()}</span>`)
+            .join("")}
+        </div>
     </div>
-  `
+    `
     return card
 }
 export async function renderPokemons(page = 1) {
@@ -39,6 +44,74 @@ export async function renderPokemons(page = 1) {
     updatePagination(page)
 }
 
+export async function createPokemonCardDetail(name) {
+    const data = await fetchPokemonDetails(name);
+    const card = document.createElement("div");
+    card.className = `card-detail text-center p-2 m-2`
+    card.innerHTML = `
+    <img src="${data.img}" class="card-img-top" alt="${data.name}">
+    <div class="card-body">
+        <h5 class="card-title text-capitalize">${data.name}</h5>
+        <div class="pokemon-types">
+        ${data.types
+            .split(",")
+            .map(t => `<span class="type-tag ${t.trim().toLowerCase()}">${t.trim().toLowerCase()}</span>`)
+            .join("")}
+        </div>
+        <div class="pokemon-abilities">
+            Abilities
+            <ul>
+                ${data.abilities.map(a => `<li>${a}</li>`).join('')}
+            </ul>
+        </div>
+        <div class="pokemon-info mt-3">
+            <table class="table table-sm table-bordered">
+                <tr>
+                    <th>Weight</th>
+                    <th>Height</th>
+                </tr>
+                <tr>
+                    <td>${data.weight}</td>
+                    <td>${data.height}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="pokemon-base-experience">Base Exp: ${data.baseExperience}</div>
+        <div class="pokemon-stats">
+            <h6 class="stats-title">STATS</h6>
+            <div class="stats-container">
+                ${data.stats
+                    .map(
+                    (s) => `
+                        <div class="stat-item ${s.name.toLowerCase()}">
+                            <div class="stat-name">${formatStatName(s.name)}</div>
+                            <div class="stat-value">${s.value}</div>
+                        </div>
+                    `
+                )
+            .join("")}
+            <div class="stat-item total">
+                <div class="stat-name">TOT</div>
+                <div class="stat-value">${data.stats.reduce((a, b) => a + b.value, 0)}</div>
+            </div>
+        </div>
+        </div>
+    </div>
+    `
+    return card
+}
+
+function formatStatName(name){
+    switch(name.toLowerCase()){
+        case "hp": return "HP"
+        case "attack": return "ATK"
+        case "defense": return "DEF"
+        case "special-attack": return "SATK"
+        case "special-defense": return "SDEF"
+        case "speed": return "SPD"
+        default: return name.toUpperCase()
+    }
+}
 function makePageButton(label, page = null, active = false) {
     const li = document.createElement("li")
     li.className = `page-item ${active ? "active" : ""}`
@@ -121,8 +194,8 @@ export async function searchPokemonByName() {
     }
     try {
         const result = await fetchPokemonDetails(value)
-        const card = createPokemonCard(result)  
-        
+        const card = createPokemonCard(result)
+
         container.innerHTML = ""
         container.appendChild(card)
 
