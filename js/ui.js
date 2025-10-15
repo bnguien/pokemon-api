@@ -59,35 +59,34 @@ function makeDisabled(text) {
 }
 
 export function updatePagination(page) {
-  currentPage = page
-  const pagination = document.getElementById("pagination")
-  pagination.innerHTML = ""
-  const total =
-    currentFilter === "all"
-      ? totalPages
-      : Math.ceil(filteredPokemonNames.length / LIMIT)
+    currentPage = page
+    const pagination = document.getElementById("pagination")
+    pagination.innerHTML = ""
+    const total =
+        currentFilter === "all"
+            ? totalPages
+            : Math.ceil(filteredPokemonNames.length / LIMIT)
 
-  const windowSize = 2;
-  const start = Math.max(1, currentPage - windowSize)
-  const end = Math.min(total, currentPage + windowSize)
+    const windowSize = 2;
+    const start = Math.max(1, currentPage - windowSize)
+    const end = Math.min(total, currentPage + windowSize)
 
-  pagination.appendChild(makePageButton(1, 1, currentPage === 1))
+    pagination.appendChild(makePageButton(1, 1, currentPage === 1))
 
-  if (start > 2) pagination.appendChild(makeDisabled("..."))
-  for (let i = start; i <= end; i++) {
-    if (i !== 1 && i !== total)
-      pagination.appendChild(makePageButton(i, i, i === currentPage))
-  }
+    if (start > 2) pagination.appendChild(makeDisabled("..."))
+    for (let i = start; i <= end; i++) {
+        if (i !== 1 && i !== total)
+            pagination.appendChild(makePageButton(i, i, i === currentPage))
+    }
 
-  if (end < total - 1) pagination.appendChild(makeDisabled("..."))
+    if (end < total - 1) pagination.appendChild(makeDisabled("..."))
 
-  if (total > 1)
-    pagination.appendChild(makePageButton(total, total, currentPage === total))
+    if (total > 1)
+        pagination.appendChild(makePageButton(total, total, currentPage === total))
 
-  document.getElementById("prev-btn").disabled = currentPage === 1
-  document.getElementById("next-btn").disabled = currentPage === total
+    document.getElementById("prev-btn").disabled = currentPage === 1
+    document.getElementById("next-btn").disabled = currentPage === total
 }
-
 
 export async function filterPokemonByType() {
     const container = document.getElementById("pokemon-list")
@@ -107,5 +106,28 @@ export async function filterPokemonByType() {
     } catch (err) {
         container.innerHTML = `<p class="text-danger text-center">Lỗi khi tải Pokémon loại ${value}</p>`
         console.error(err);
+    }
+}
+
+export async function searchPokemonByName() {
+    const searchInput = document.getElementById("search-input")
+    const value = searchInput.value.trim().toLowerCase()
+    const result = await fetchPokemonDetails(value)
+
+    const container = document.getElementById("pokemon-list")
+    if (!value) {
+        alert("Vui lòng nhập tên Pokémon!")
+        return
+    }
+    try {
+        const result = await fetchPokemonDetails(value)
+        const card = createPokemonCard(result)  
+        
+        container.innerHTML = ""
+        container.appendChild(card)
+
+        document.getElementById("pagination").innerHTML = ""
+    } catch (err) {
+        alert(`Không tìm thấy Pokémon "${value}"`)
     }
 }
