@@ -1,0 +1,243 @@
+#pokemon-list .card-title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px;
+  color: #333;
+}
+
+#pokemon-list .card-text {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  color: #333;
+}
+
+.pokemon-types {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  color: #333;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  width: 400px;
+  max-height: 100vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+.card-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+.btn-close {
+  position: absolute;
+  top: 1px;
+  right: 4px;
+  font-size: 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 1000;
+}
+.pokemon-info{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.pokemon-info .pokemon-weight{
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 5px;
+  text-align: center;
+  margin: 5px;
+}
+.pokemon-info .pokemon-weight,
+.pokemon-info .pokemon-height{
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  margin: 5px;
+}
+.pokemon-abilities{
+  margin-top: 10px;
+}
+.pokemon-abilities ul{
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.pokemon-abilities ul li{
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 7px;
+  margin: 3px;
+  text-align: center;
+  font-size: 9px;
+}
+.type-tag {
+  color: white;
+  border-radius: 12px;
+  padding: 3px 8px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.type-tag.grass {
+  background-color: #78C850;
+}
+
+.type-tag.poison {
+  background-color: #A040A0;
+}
+
+.type-tag.fire {
+  background-color: #F08030;
+}
+
+.type-tag.water {
+  background-color: #6890F0;
+}
+
+.type-tag.electric {
+  background-color: #F8D030;
+  color: #333;
+}
+
+.type-tag.ice {
+  background-color: #98D8D8;
+  color: #333;
+}
+
+.type-tag.fighting {
+  background-color: #C03028;
+}
+
+.type-tag.ground {
+  background-color: #E0C068;
+  color: #333;
+}
+
+.type-tag.flying {
+  background-color: #A890F0;
+}
+
+.type-tag.psychic {
+  background-color: #F85888;
+}
+
+.type-tag.bug {
+  background-color: #A8B820;
+}
+
+.type-tag.rock {
+  background-color: #B8A038;
+}
+
+.type-tag.ghost {
+  background-color: #705898;
+}
+
+.type-tag.dark {
+  background-color: #705848;
+}
+
+.type-tag.dragon {
+  background-color: #7038F8;
+}
+
+.type-tag.steel {
+  background-color: #B8B8D0;
+  color: #333;
+}
+
+.type-tag.fairy {
+  background-color: #EE99AC;
+}
+
+.type-tag.normal {
+  background-color: #A8A878;
+}
+
+.pokemon-stats {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.stats-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+}
+
+.stats-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 60px;
+  border-radius: 25px;
+  color: white;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.stat-name {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px 20px 0 0;
+  padding: 4px 0;
+  width: 100%;
+  text-align: center;
+  font-size: 8px;
+}
+
+.stat-value {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 0 0 20px 20px;
+  padding: 4px 0;
+  width: 100%;
+  text-align: center;
+  font-size: 9px;
+}
+.stat-item.hp { background: #E74C3C; }         
+.stat-item.attack { background: #E67E22; }   
+.stat-item.defense { background: #F1C40F; }
+.stat-item.special-attack { background: #5DADE2; }  
+.stat-item.special-defense { background: #58D68D; }
+.stat-item.speed { background: #F06292; }
+.stat-item.total { background: #7F8C8D; } 
