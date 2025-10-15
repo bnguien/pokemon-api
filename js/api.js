@@ -22,9 +22,15 @@ export async function fetchPokemonDetails(name) {
     return {
         name: data.name,
         img: data.sprites.front_default,
-        types: data.types.map(t => t.type.name).join(', ')
+        types: data.types.map(t => t.type.name).join(', '),
+        abilities: data.abilities.map(a => a.ability.name),
+        weight: data.weight,
+        height: data.height,
+        baseExperience: data.base_experience,
+        stats: data.stats.map(s => ({ name: s.stat.name, value: s.base_stat }))
     }
 }
+
 export async function fetchPokemonTypes(type){
     var url = `https://pokeapi.co/api/v2/type/${type}`
     const res = await fetch(url);
