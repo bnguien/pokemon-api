@@ -23,5 +23,12 @@ export async function fetchPokemonDetails(name) {
         name: data.name,
         img: data.sprites.front_default,
         types: data.types.map(t => t.type.name).join(', ')
-    };
+    }
+}
+export async function fetchPokemonTypes(type){
+    var url = `https://pokeapi.co/api/v2/type/${type}`
+    const res = await fetch(url);
+    if(!res.ok) throw new Error("Không thể tải chi tiết từng loại Pokémon")
+    const data = await res.json()
+    return data.pokemon.map(n=>n.pokemon.name)
 }
